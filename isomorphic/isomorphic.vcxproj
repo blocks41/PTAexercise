@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{97e5f55e-0078-40bc-9aaa-effa15869a2f}</ProjectGuid>
-    <RootNamespace>E6</RootNamespace>
+    <ProjectGuid>{42ed32f4-be8c-4510-88a7-e103e1e7b438}</ProjectGuid>
+    <RootNamespace>isomorphic</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="isomorphic.cpp" />
+    <ClCompile Include="iosomorphic.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="题目.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

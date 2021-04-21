@@ -35,7 +35,7 @@ int main() {
 
 Tree BuildTree(TreeNode* T)
 {
-    int N, i, check[MaxSize]{0}, Root = Null;
+    int N, i, check[MaxSize]{ 0 }, Root = Null;
     char cl, cr;
 
     std::cin >> N;
