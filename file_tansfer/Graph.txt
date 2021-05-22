@@ -1,0 +1,143 @@
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+using WeightType = int;   //定义权重类型为int
+using Vertex = int;   //定义结点类型为int
+
+//邻接表的每一项
+using PtrToAdjNode = class AdjVNode*;
+class AdjVNode {
+public:
+    Vertex AdjV;   //邻接点下标
+    PtrToAdjNode Next;  //下一个结点
+};
+//邻接表
+using AdjList = class VNode*;
+class VNode {
+public:
+    PtrToAdjNode FirstEdge;
+    int Data;  //可以用来插入单独的点，没有边
+};
+
+//以邻接矩阵存储的图类
+class Graph {
+private:
+    int Nv;  //顶点数 
+    int Ne;  // 边数   
+    AdjList G; // 邻接表
+    bool* Visited;  //标志是否访问过
+public:
+    Graph(int VertexNum);  //带参构造函数
+    void InsertEdge(Vertex V1, Vertex V2);    //插入边
+    bool is_Connected(Vertex V1, Vertex V2); //判断两个点是否连通,DFS
+    void Init_Visited();  //将Visited全部变为false
+    void Connect_Num();
+};
+
+
+int main() {
+    int Num_of_Node;  //结点数
+    char flag;   //操作标识符
+    Vertex V1, V2;    //点
+    queue<int> Q;    //存放最后的结点
+
+    cin >> Num_of_Node;  //输入结点数
+    Graph G{ Num_of_Node };   //定义图
+
+    while (1) {
+        cin >> flag;
+        if (flag == 'I') {
+            cin >> V1 >> V2;
+            G.InsertEdge(V1, V2);
+        }
+        else if (flag == 'C') {
+            cin >> V1 >> V2;
+            G.Init_Visited();
+            if (G.is_Connected(V1, V2)) Q.push(1);
+            else Q.push(0);
+        }
+        else if (flag == 'S') break;
+    }
+
+    while (!Q.empty()) {
+        if (Q.front()) {
+            cout << "yes\n";
+            Q.pop();
+        }
+        else {
+            cout << "no\n";
+            Q.pop();
+        }
+    }
+
+    G.Connect_Num();
+
+    return 0;
+}
+
+Graph::Graph(int VertexNum) {
+    Nv = VertexNum;
+    Ne = 0;
+    G = new VNode[VertexNum];
+    Visited = new bool[VertexNum];
+
+    for (int i = 0; i < VertexNum; i++) {
+        G[i].FirstEdge = nullptr;
+        Visited[i] = false;
+    }
+}
+
+void Graph::InsertEdge(Vertex V1, Vertex V2) {
+    PtrToAdjNode NewNode;
+
+    //这里可以加判断有没有加过这条边，但是会超时
+    //Init_Visited();
+    //if (!is_Connected(V1, V2))
+
+    //插入边 <V1, V2>
+    NewNode = new AdjVNode;  //建立结点
+    NewNode->AdjV = V2;
+    //  将结点插入头后
+    NewNode->Next = G[V1].FirstEdge;
+    G[V1].FirstEdge = NewNode;
+
+    //插入边 <V1, V2>
+    NewNode = new AdjVNode;  //建立结点
+    NewNode->AdjV = V1;
+    //  将结点插入头后
+    NewNode->Next = G[V2].FirstEdge;
+    G[V2].FirstEdge = NewNode;
+
+    Ne++;//边数加1
+}
+
+bool Graph::is_Connected(Vertex V1, Vertex V2) {
+    PtrToAdjNode W;
+    int flag = false;    //用来判断是否存在V2
+
+    Visited[V1] = true; /* 标记V已访问,防止出现死循环 */
+
+    for (W = G[V1].FirstEdge; W; W = W->Next) {
+        if (W->AdjV == V2) return true;
+        else if (!Visited[W->AdjV]) {    //未被访问
+            if (is_Connected(W->AdjV, V2)) {    //如果递归连接
+                flag = true;
+                break;
+            }
+        }
+    }
+    return flag;
+}
+
+void Graph::Init_Visited() {
+    for (int i = 0; i < Nv; i++) {
+        Visited[i] = false;
+    }
+}
+
+void Graph::Connect_Num() {
+    if (Ne >= Nv - 1) cout << "The network is connected.";     //如果边数大于等于结点数-1，说明全连通
+    else cout << "There are " << Nv - Ne << " components.";   //有几个集合
+}

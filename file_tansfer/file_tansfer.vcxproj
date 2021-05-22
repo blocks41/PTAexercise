@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2f8330c6-4ebd-4ab7-817d-0bfd278b3b1a}</ProjectGuid>
-    <RootNamespace>filetransfer</RootNamespace>
+    <ProjectGuid>{5d7b4c0b-83c2-4244-89cd-4618fe0f1d25}</ProjectGuid>
+    <RootNamespace>filetansfer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="main.cpp" />
+    <Text Include="Graph.txt" />
+    <Text Include="题目.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="题目.txt" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

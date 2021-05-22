@@ -15,14 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Graph.txt">
+      <Filter>资源文件</Filter>
+    </Text>
     <Text Include="题目.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graph.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
